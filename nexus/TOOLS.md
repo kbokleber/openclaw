@@ -53,34 +53,66 @@ export $(cat /data/workspace/agent-nexus/.secure/n8n-credentials.json | jq -r 't
 
 ---
 
-## 🐙 Git Configuration
+## 🐙 Git Configuration (CRÍTICO - NUNCA PERDER!)
 
 - **User:** Kleber Bueno <kbosolucoes@gmail.com>
 - **GitHub:** https://github.com/kbokleber
-- **Repositórios:** https://github.com/kbokleber?tab=repositories
 - **Username:** `kbokleber`
 - **Default Branch:** main
 - **SSH Key:** `.secure/ssh/id_ed25519` (ED25519)
 - **SSH Public Key:** `.secure/ssh/id_ed25519.pub`
 
-### 🔐 Persistência das Chaves SSH
-⚠️ **NUNCA perder estes arquivos:** As chaves SSH em `.secure/ssh/` permitem acesso aos repositórios Git do Kleber.
+### 🔐 Chaves SSH - Persistência OBRIGATÓRIA
+⚠️ **NUNCA perder estes arquivos:** `.secure/ssh/id_ed25519` (PRIVADA!)  
+Sem as chaves SSH **não há acesso ao GitHub** — perde acesso a todos os repositórios.
 
-**Setup SSH:**
+**Setup SSH (obrigatório antes de usar Git):**
 ```bash
-# Copiar chaves para ~/.ssh/
+# 1. Copiar chaves para ~/.ssh/
+mkdir -p ~/.ssh
 cp /data/workspace/agent-nexus/.secure/ssh/id_ed25519* ~/.ssh/
 chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
 
-# Testar conexão
+# 2. Configurar git
+git config --global user.name "Kleber Bueno"
+git config --global user.email "kbosolucoes@gmail.com"
+git config --global init.defaultBranch main
+
+# 3. Testar conexão
 ssh -T git@github.com
 ```
 
-**Adicionar chave ao GitHub:**
+**Adicionar chave ao GitHub (se necessário):**
 ```bash
-# Copiar public key
 cat /data/workspace/agent-nexus/.secure/ssh/id_ed25519.pub
-# Colar em: GitHub → Settings → SSH and GPG keys → New SSH key
+# Copiar e colar em: GitHub → Settings → SSH and GPG keys → New SSH key
+```
+
+---
+
+## 📦 Repositório openclaw (CONFIGURAÇÕES DOS AGENTES)
+
+**URL:** https://github.com/kbokleber/openclaw  
+**Clone:** `git@github.com:kbokleber/openclaw.git`  
+**Branch:** main
+
+**O que contém:**
+- Configuração completa do Nexus (SOUL, MEMORY, TOOLS, etc.)
+- Skills instaladas (n8n)
+- Documentação dos agentes
+
+**⚠️ ATENÇÃO:** Arquivos em `.secure/` (credenciais, SSH keys) **NÃO ESTÃO NO REPO** por segurança.
+
+**Para restaurar ambiente:**
+```bash
+# 1. Clonar repo
+git clone git@github.com:kbokleber/openclaw.git
+
+# 2. Copiar chaves e credenciais manualmente (de backup externo)
+# - .secure/ssh/id_ed25519
+# - .secure/ssh/id_ed25519.pub
+# - .secure/n8n-credentials.json
 ```
 
 ---

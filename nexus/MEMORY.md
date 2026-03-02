@@ -39,18 +39,18 @@
 - **SSH Keys:** `.secure/ssh/` — ED2559
 - **Public Key:** `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+m2z9m31IK3gRefQw0eVckk7kkS874VJdu64YKrUf7 kbosolucoes@gmail.com`
 
-### 🔐 Chaves SSH (Persistência OBRIGATÓRIA)
+### 🔐 Chaves SSH (Persistência OBRIGATÓRIA - NUNCA PERDER!)
 **Status:** ✅ Configurado em 02/03/2026
 **Local:** `.secure/ssh/id_ed25519` (PRIVADA - nunca perder!)
 
-**⚠️ IMPORTANTE:** Sem as chaves SSH, Nexus **não consegue**:
-- Fazer push/pull em repositórios
-- Clonar/codar em projetos do Kleber
-- Fazer deploy automático
+**⚠️ CRÍTICO:** As chaves SSH **SÃO ESSENCIAIS** para acesso ao GitHub do Kleber. Sem elas:
+- ❌ Nexus não consegue fazer push/pull em repositórios
+- ❌ Perde acesso ao repo `openclaw`
+- ❌ Não consegue clonar código ou fazer deploy
 
 **Configurando o Git:**
 ```bash
-# Copiar chaves SSH
+# Copiar chaves SSH (ESSENCIAL!)
 mkdir -p ~/.ssh
 cp /data/workspace/agent-nexus/.secure/ssh/id_ed25519* ~/.ssh/
 chmod 600 ~/.ssh/id_ed25519
@@ -64,3 +64,21 @@ git config --global init.defaultBranch main
 **Adicionar ao GitHub (se necessário):**
 1. Copiar public key: `cat ~/.ssh/id_ed25519.pub`
 2. GitHub → Settings → SSH and GPG keys → New SSH key
+
+---
+
+## 📦 Repositório openclaw - Criado em 02/03/2026 (CRÍTICO!)
+**URL:** https://github.com/kbokleber/openclaw
+**Descrição:** Configurações dos agentes OpenClaw (Nexus, Victoria, etc.)
+**Local:** `/data/workspace/agent-nexus/`
+
+**⚠️ IMPORTANTE:** Este repo contém TODAS as configurações dos agentes.
+- Sempre manter sincronizado
+- Nunca commitar `.secure/`
+- Se perder o workspace, clonar de: `git@github.com:kbokleber/openclaw.git`
+
+**Para recuperar:**
+```bash
+git clone git@github.com:kbokleber/openclaw.git
+# Depois restaurar arquivos de .secure/ manualmente
+```
