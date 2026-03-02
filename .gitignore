@@ -1,0 +1,10 @@
+# Credenciais sensíveis - NUNCA commitar!
+/**/*.secure/
+/.secure/
+**/n8n-credentials.json
+**/id_ed25519
+**/credentials.json
+config.json
+
+# Ambiente
+.env
