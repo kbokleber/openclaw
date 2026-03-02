@@ -1,0 +1,12 @@
+# Credenciais sensíveis - NUNCA commitar!
+/**/*.secure/
+/.secure/
+config.json
+.env
+
+# Memories diárias podem conter dados pessoais de clientes
+/memory/*.md
+
+# Ambiente
+node_modules/
+*.log
